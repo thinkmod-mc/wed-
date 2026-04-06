@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Viện Video</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="glass-header">
+        <div class="header-container">
+            <h1 class="logo"><i class="fas fa-play-circle"></i> VideoHub</h1>
+            <div class="search-filter">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm video...">
+                <select id="categoryFilter">
+                    <option value="all">Tất cả danh mục</option>
+                    <option value="music">Âm nhạc</option>
+                    <option value="education">Giáo dục</option>
+                    <option value="entertainment">Giải trí</option>
+                    <option value="news">Tin tức</option>
+                </select>
+            </div>
+            <nav>
+                <a href="admin.html" class="admin-link"><i class="fas fa-user-cog"></i> Quản trị</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="skeletonContainer" class="video-grid">
+            <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text"></div></div>
+            <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text"></div></div>
+            <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text"></div></div>
+            <div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text"></div></div>
+        </div>
+
+        <div id="videoGrid" class="video-grid" style="display: none;">
+            </div>
+    </main>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="video-container">
+                <video id="modalVideoPlayer" controls></video>
+            </div>
+            <div class="video-info">
+                <h2 id="modalTitle">Tiêu đề video</h2>
+                <div class="meta-info">
+                    <span id="modalCategory" class="badge">Danh mục</span>
+                    <span class="views"><i class="fas fa-eye"></i> <span id="modalViews">0</span> lượt xem</span>
+                </div>
+                <p id="modalDescription">Mô tả video...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Gọi hàm khởi tạo trang chủ khi load xong
+        document.addEventListener('DOMContentLoaded', () => {
+            initApp();
+            loadVideosForUser();
+        });
+    </script>
+</body>
+</html>
